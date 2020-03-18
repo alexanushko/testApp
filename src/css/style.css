@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+body {
+  background: url(../img/bg5.jpg) no-repeat center;
+  background-size: cover;
+  z-index: 0;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  display: flex;
+  width: 85%;
+  border: 2px solid #242323;
+  border-radius: 5px;
+  margin: 5px 0 5px 0;
+  z-index: 1;
+  background: linear-gradient(to top, #fcd2c4 40%, #f7f7ee 60%, #fff7c9 90%);
+  opacity: 0.85;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28%;
+  border-right: 2px solid #242323;
+  z-index: 2;
+}
+.sidebar :last-child {
+  margin-bottom: 2px;
+}
+
+.sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px 0 15px;
+  width: 96%;
+  height: 50px;
+  border: 0.5px solid #3b3838;
+  margin-top: 2px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #181818;
+}
+.sidebar-item .sidebar-item-text-container :first-child {
+  font-weight: bold;
+}
+
+.view-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 72%;
+  z-index: 2;
+  opacity: 1;
+}
+.view-container h1 {
+  margin-top: 10px;
+}
+.view-container .defolt-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+.view-container .defolt-text-container p {
+  text-align: center;
+  margin-top: 10px;
+}
+.view-container .defolt-text-container div {
+  width: 200px;
+  height: 25px;
+  background: url(../img/decor1.png) no-repeat;
+  background-position: center 5px;
+}
+.view-container .big-item {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 96%;
+  height: 100%;
+  z-index: 3;
+}
+.view-container .big-item .big-item-text-container {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  height: 50%;
+}
+.view-container .big-item .big-item-text-container h2 {
+  margin-top: 15px;
+}
+.view-container .big-item .item-picture {
+  display: flex;
+  width: 55%;
+  height: 55%;
+  border: 0.5px solid #3b3838;
+  border-radius: 10px;
+}
+.view-container .big-item .item-picture img {
+  width: 100%;
+  background-size: contain;
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.deleteClass {
+  background-color: #494949;
+}
