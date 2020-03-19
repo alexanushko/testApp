@@ -24,16 +24,8 @@ async function getData() {
 export class App extends React.Component{
 
   state = {
-    items: [],
-    picture: {},
+    items: []
   };
-
-  getPicture = async (link) => {
-    const picture = await axios('https://mrsoft.by/tz20'+link);
-    this.setState({
-      picture: picture
-    });
-  }
 
   async componentDidMount(){
     let apiData = await getData();
@@ -62,9 +54,9 @@ export class App extends React.Component{
 
 render(){
   const items = this.state.items;
-  console.log("стейт ", items);
+
+  //слиял воедино
   
-if(Object.keys(this.state.picture).length !== 0){
   return (
     <div className="main">
       <BrowserRouter>
@@ -74,44 +66,28 @@ if(Object.keys(this.state.picture).length !== 0){
               key={item.id} 
               item={item}
               deleteItem={() => this.deleteItem(items,item.id)}
-              getPicture={() => this.getPicture(item.more)}
               deleteClass={item.class}
             />
           ))}
         </div> 
         <div className="view-container">
           <Switch>  
+            <Route exact path="/" render={() =>
+              <>
+                <h1>Породы кошек</h1>
+                <div className="defolt-text-container">
+                  <p>В списке слева представлены некторые породы кошек. По щелчку на элемент вы сможете увидеть более подробную информацию</p>
+                  <div></div>
+                </div>
+              </>
+            }/>
             {items.map(item => (
-              <Route key={item.id} path={`/${item.name}`} render={() => <BigItem item={item} picture={this.state.picture}/>} />
+              <Route key={item.id} exact path={`/${item.name}`} render={() => <BigItem item={item}/>}/>
             ))}
           </Switch>
         </div>
       </BrowserRouter>
     </div>
   );
-} else {
-  return (
-    <div className="main">
-      <div className="sidebar">
-        {items.map(item => (
-          <SidebarItem
-            key={item.id} 
-            item={item}
-            deleteItem={() => this.deleteItem(items,item.id)}
-            getPicture={() => this.getPicture(item.more)}
-            deleteClass={item.class}
-          />
-        ))}
-      </div> 
-      <div className="view-container">
-        <h1>Породы кошек</h1>
-        <div className="defolt-text-container">
-          <p>В списке слева представлены некторые породы кошек. По щелчку на элемент вы сможете увидеть более подробную информацию</p>
-          <div></div>
-        </div>
-      </div>
-  </div>
-  );
-}
 }}
  

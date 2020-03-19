@@ -54,7 +54,7 @@ body {
   font-size: 16px;
   color: #181818;
 }
-.sidebar-item .sidebar-item-text-container :first-child {
+.sidebar-item div :first-child {
   font-weight: bold;
 }
 
@@ -99,6 +99,10 @@ body {
   width: 45%;
   height: 50%;
 }
+.view-container .big-item .big-item-text-container p {
+  margin: 15px 10px 0 0;
+  text-align: justify;
+}
 .view-container .big-item .big-item-text-container h2 {
   margin-top: 15px;
 }
@@ -117,5 +121,12 @@ body {
 }
 
 .deleteClass {
-  background-color: #494949;
+  background-color: #797979;
+  pointer-events: none;
+  color: #ececec;
+  border: 1px solid grey;
+}
+
+.span {
+  pointer-events: all;
 }
