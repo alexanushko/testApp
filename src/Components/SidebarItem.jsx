@@ -12,8 +12,7 @@ export const SidebarItem = ({...props}) => {
         <p>{props.item.name}</p>
         <p>{props.item.shortInfo}</p>
       </div>
-      <span class="span" role="img" onClick={e => {
-        // debugger;
+      <span className="span" role="img" onClick={() => {
         props.deleteItem(); 
         }}>❌</span>
     </NavLink>    
