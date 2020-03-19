@@ -13,26 +13,27 @@ import {BigItem} from './Components/BigItem';
 
 let testApi = 'https://mrsoft.by/tz20/list.json';
 
-async function getData() {
-  const res = await axios(testApi);
-  const result = res.data.data;
-  const resultData = result.map(elm => ({...elm, class: false}));
-  return resultData;
-}
-
-
 export class App extends React.Component{
 
   state = {
     items: []
   };
 
-  async componentDidMount(){
-    let apiData = await getData();
-
+  getData = async() => {
+    const res = await axios(testApi);
+    const result = res.data.data;
+    const resultData = result.map(elm => ({...elm, class: false}));
+    localStorage.setItem("catsArray", JSON.stringify(resultData));
     this.setState({
-      items: apiData
+      items: resultData
     });
+  }
+
+  async componentDidMount(){
+    (localStorage.getItem("catsArray") !== null) ?
+      (this.setState({
+        items: JSON.parse(localStorage.getItem("catsArray"))
+      })) : await this.getData();
   };
 
   deleteItem = (items,itemId) => {
@@ -40,27 +41,41 @@ export class App extends React.Component{
     const itemIndex = items.findIndex(item => item.id === itemId);
     const itemToDelete = items[itemIndex];
     itemToDelete.class = !itemToDelete.class;
-
-    console.log("itemToDelete",itemToDelete);
+    const resultArr = [
+      ...items.slice(0, itemIndex),
+      itemToDelete,
+      ...items.slice(itemIndex + 1)
+    ];
+    localStorage.setItem("catsArray", JSON.stringify(resultArr));
 
     this.setState({
-      items: [
-        ...items.slice(0, itemIndex),
-        itemToDelete,
-        ...items.slice(itemIndex + 1)
-      ]
+      items: resultArr
     });
   }
 
 render(){
   const items = this.state.items;
-
-  //слиял воедино
+  console.log("state: ",items)
   
   return (
     <div className="main">
       <BrowserRouter>
         <div className="sidebar">
+          <div className="input-box">
+            <span>Filter:</span>
+            <input 
+              id="search" 
+              type="text"
+              onChange={e => {
+                const filteredArray = (JSON.parse(localStorage.getItem("catsArray"))).filter(cat => 
+                  (cat.name.toLowerCase().includes(e.target.value.toLowerCase()))
+                );
+                this.setState({
+                  items: filteredArray
+                });
+              }}
+            />
+          </div>
           {items.map(item => (
             <SidebarItem
               key={item.id} 

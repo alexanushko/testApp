@@ -25,6 +25,7 @@ body{
 .main{
   display: flex;
   width: 85%;
+  min-height: 100vh;
   border: $mainBorder;
   border-radius: 5px;
   margin: 5px 0 5px 0;
@@ -43,6 +44,34 @@ body{
 
   :last-child{
     margin-bottom: 2px;
+  }
+
+  .input-box{
+    display: flex;
+    align-items: center;
+    padding: 2px 5px 2px 15px;
+    width: 96%;
+    height: 35px;
+    border: 2px solid black;
+    margin-top: 2px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgb(24, 24, 24);
+
+    span{
+      width: 25%;
+      font-size: 20px;
+      font-weight: bold;
+      margin-right: 5px;
+      color: white;
+    }
+    input{
+      color: rgb(24, 24, 24);
+      width: 100%;
+      height: 90%;
+      border: $border;
+      border-radius: 5px;
+    }
   }
 }
 
