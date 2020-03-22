@@ -26,8 +26,7 @@ body {
   border-radius: 5px;
   margin: 5px 0 5px 0;
   z-index: 1;
-  background: linear-gradient(to top, #fcd2c4 40%, #f7f7ee 60%, #fff7c9 90%);
-  opacity: 0.85;
+  background: linear-gradient(to top, rgba(252, 210, 196, 0.85) 40%, rgba(247, 247, 238, 0.85) 60%, rgba(255, 247, 201, 0.85) 90%);
 }
 
 .sidebar {
@@ -84,6 +83,29 @@ body {
 .sidebar-item div :first-child {
   font-weight: bold;
 }
+.sidebar-item div :nth-child(3) {
+  font-size: 12px;
+}
+
+.deleteClass {
+  background-color: #a5a5a5;
+  pointer-events: none;
+  color: #ececec;
+  border: 1px solid grey;
+  height: 60px;
+}
+.deleteClass div :first-child {
+  font-weight: bold;
+  color: white;
+}
+.deleteClass span {
+  margin-right: 7px;
+  font-weight: bold;
+}
+
+.span {
+  pointer-events: all;
+}
 
 .view-container {
   display: flex;
@@ -91,7 +113,6 @@ body {
   flex-direction: column;
   width: 72%;
   z-index: 2;
-  opacity: 1;
 }
 .view-container h1 {
   margin-top: 10px;
@@ -135,8 +156,8 @@ body {
 }
 .view-container .big-item .item-picture {
   display: flex;
-  width: 55%;
-  height: 55%;
+  width: 35vw;
+  height: 60vh;
   border: 0.5px solid #3b3838;
   border-radius: 10px;
 }
@@ -145,15 +166,4 @@ body {
   background-size: contain;
   border-radius: 10px;
   z-index: 3;
-}
-
-.deleteClass {
-  background-color: #797979;
-  pointer-events: none;
-  color: #ececec;
-  border: 1px solid grey;
-}
-
-.span {
-  pointer-events: all;
 }

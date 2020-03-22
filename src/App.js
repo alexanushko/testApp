@@ -11,7 +11,7 @@ import {
 import {SidebarItem} from './Components/SidebarItem';
 import {BigItem} from './Components/BigItem';
 
-let testApi = 'https://mrsoft.by/tz20/list.json';
+let testApi = 'tz20/list.json';
 
 export class App extends React.Component{
 
@@ -38,14 +38,25 @@ export class App extends React.Component{
 
   deleteItem = (items,itemId) => {
 
+    function getTime(){
+      const time = new Date();
+      const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      };
+      return time.toLocaleString("en", options);
+    };
+
     const itemIndex = items.findIndex(item => item.id === itemId);
     const itemToDelete = items[itemIndex];
     itemToDelete.class = !itemToDelete.class;
-    const resultArr = [
-      ...items.slice(0, itemIndex),
-      itemToDelete,
-      ...items.slice(itemIndex + 1)
-    ];
+    const resultArr = (itemToDelete.class)?
+      [...items.slice(0, itemIndex),...items.slice(itemIndex + 1),{...itemToDelete,time: `Deleted ${getTime()}`}] :
+      [{...itemToDelete,time:""},...items.slice(0, itemIndex),...items.slice(itemIndex + 1)];
     localStorage.setItem("catsArray", JSON.stringify(resultArr));
 
     this.setState({
@@ -55,7 +66,6 @@ export class App extends React.Component{
 
 render(){
   const items = this.state.items;
-  console.log("state: ",items)
   
   return (
     <div className="main">
