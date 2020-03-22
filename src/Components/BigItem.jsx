@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 async function getPicture(link){
-  return await axios('https://mrsoft.by/tz20'+link);
+  return await axios('/tz20'+link);
 }
 
 export class BigItem extends React.Component{
@@ -32,7 +32,7 @@ export class BigItem extends React.Component{
           <p>{picture.data.bio}</p>
         </div>
         <div className="item-picture">
-          <img src={`https://mrsoft.by/tz20${picture.data.pic}`} alt="картинка с сервера"/>
+          <img src={`/tz20${picture.data.pic}`} alt="картинка с сервера"/>
         </div>
       </div>    
     );

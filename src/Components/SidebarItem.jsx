@@ -3,18 +3,24 @@ import { NavLink } from 'react-router-dom'
 
 export const SidebarItem = ({...props}) => {
 
+  const item = props.item; 
+
   return (
     <NavLink 
-      to={`/${props.item.name}`} 
+      to={`/${item.name}`} 
       className={(props.deleteClass) ? "sidebar-item deleteClass" : "sidebar-item"}
+      onClick={e => {
+        e.stopPropagation();}}
     >
       <div>
-        <p>{props.item.name}</p>
-        <p>{props.item.shortInfo}</p>
+        <p>{item.name}</p>
+        <p>{item.shortInfo}</p>
+        <p>{item.time}</p>
       </div>
-      <span className="span" role="img" onClick={() => {
+      <span className="span" role="img" onClick={e => {
+        e.stopPropagation();
         props.deleteItem(); 
-        }}>❌</span>
+      }}>{(props.deleteClass)? 'R':'❌'}</span>
     </NavLink>    
   );
 }
