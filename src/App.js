@@ -19,20 +19,27 @@ export class App extends React.Component{
     items: []
   };
 
+  getFromLocalStorage = () => {
+    return localStorage.getItem("catsArray");
+  }
+
+  putToLocalStorage = (data) => {
+    localStorage.setItem("catsArray", JSON.stringify(data));
+  }
+
   getData = async() => {
     const res = await axios(testApi);
-    const result = res.data.data;
-    const resultData = result.map(elm => ({...elm, class: false}));
-    localStorage.setItem("catsArray", JSON.stringify(resultData));
+    const resultData = (res.data.data).map(elm => ({...elm, class: false}));
+    this.putToLocalStorage(resultData);
     this.setState({
       items: resultData
     });
   }
 
   async componentDidMount(){
-    (localStorage.getItem("catsArray") !== null) ?
+    (this.getFromLocalStorage() !== null) ?
       (this.setState({
-        items: JSON.parse(localStorage.getItem("catsArray"))
+        items: JSON.parse(this.getFromLocalStorage())
       })) : await this.getData();
   };
 
@@ -57,7 +64,7 @@ export class App extends React.Component{
     const resultArr = (itemToDelete.class)?
       [...items.slice(0, itemIndex),...items.slice(itemIndex + 1),{...itemToDelete,time: `Deleted ${getTime()}`}] :
       [{...itemToDelete,time:""},...items.slice(0, itemIndex),...items.slice(itemIndex + 1)];
-    localStorage.setItem("catsArray", JSON.stringify(resultArr));
+    this.putToLocalStorage(resultArr);
 
     this.setState({
       items: resultArr
@@ -77,7 +84,7 @@ render(){
               id="search" 
               type="text"
               onChange={e => {
-                const filteredArray = (JSON.parse(localStorage.getItem("catsArray"))).filter(cat => 
+                const filteredArray = (JSON.parse(this.getFromLocalStorage())).filter(cat => 
                   (cat.name.toLowerCase().includes(e.target.value.toLowerCase()))
                 );
                 this.setState({
@@ -90,7 +97,7 @@ render(){
             <SidebarItem
               key={item.id} 
               item={item}
-              deleteItem={() => this.deleteItem(items,item.id)}
+              deleteItem={() => this.deleteItem(JSON.parse(this.getFromLocalStorage()),item.id)}
               deleteClass={item.class}
             />
           ))}
